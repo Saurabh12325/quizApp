@@ -13,6 +13,7 @@ public class AdminController {
 //hello thi sis tesing
     //hello  ayush
 //1
+
     @PostMapping("/create-quiz")
     public ResponseEntity<?> createQuiz(@RequestBody Quiz quiz) {
         return ResponseEntity.ok(adminService.createQuiz(quiz));
