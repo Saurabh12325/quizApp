@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/admin")
 public class AdminController {
 
+@Autowired
     private AdminService adminService;
-//hello thi sis tesing
-    //hello  ayush
-//1
 
     @PostMapping("/create-quiz")
     public ResponseEntity<?> createQuiz(@RequestBody Quiz quiz) {
