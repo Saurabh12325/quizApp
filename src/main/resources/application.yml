@@ -3,7 +3,9 @@ spring:
   mongodb:
     uri: mongodb+srv://saurabh_12325:mongo%404321@cluster0.bgqcp.mongodb.net/questions?retryWrites=true&w=majority
 
-
+ml:
+  api:
+    url: https://quizz-ml.onrender.com/pred
 
 
 
