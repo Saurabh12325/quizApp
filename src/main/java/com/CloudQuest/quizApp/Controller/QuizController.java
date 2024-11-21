@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/quiz")
+@RequestMapping("quiz")
 public class QuizController {
 
     private final QuizSummaryService quizSummaryService;
@@ -39,5 +39,5 @@ public class QuizController {
     @PutMapping("/update/{quizId}")
     public ResponseEntity<?> updateQuiz(@PathVariable String quizId, @RequestBody Quiz updatedQuiz) {
         return ResponseEntity.ok(quizService.updateQuiz(quizId, updatedQuiz));
-}
+    }
 }

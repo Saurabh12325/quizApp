@@ -5,7 +5,7 @@ spring:
 
 ml:
   api:
-    url: https://quizz-ml.onrender.com/pred
+    url: https://quizz-ml.onrender.com/sum
 
 
 
