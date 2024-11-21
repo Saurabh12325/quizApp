@@ -8,7 +8,7 @@ import java.util.List;
 @RestController
 @RequestMapping("quizzes")
 public class QuestionsController {
-
+    @Autowired
    QuestionService questionService;
 
     @GetMapping("allQuestions")
