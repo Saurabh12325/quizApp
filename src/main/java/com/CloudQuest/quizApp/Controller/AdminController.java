@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
 
     private AdminService adminService;
-
+//hello thi sis tesing
+    //hello  ayush
     @PostMapping("/create-quiz")
     public ResponseEntity<?> createQuiz(@RequestBody Quiz quiz) {
         return ResponseEntity.ok(adminService.createQuiz(quiz));
