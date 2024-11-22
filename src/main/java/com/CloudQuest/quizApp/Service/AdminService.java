@@ -2,9 +2,11 @@ package com.CloudQuest.quizApp.Service;
 import com.CloudQuest.quizApp.Entity.Quiz;
 import com.CloudQuest.quizApp.Repository.QuizRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
+@Component
 public class AdminService {
     @Autowired
     private QuizRepository quizRepository;

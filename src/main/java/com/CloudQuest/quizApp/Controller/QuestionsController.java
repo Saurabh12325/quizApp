@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @RequestMapping("quizzes")
-public class QuestionsController {
 
+public class QuestionsController {
+@Autowired
    QuestionService questionService;
 
     @GetMapping("allQuestions")

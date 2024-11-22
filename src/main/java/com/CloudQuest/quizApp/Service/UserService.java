@@ -21,7 +21,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public   String submitQuiz(String quizId, User user) {
+    public  String submitQuiz(String quizId, User user) {
         Quiz quiz = quizRepository.findById(quizId).orElseThrow(() -> new RuntimeException("Quiz not found"));
         int score = calculateScore(quiz, user);
         user.setScore(score);

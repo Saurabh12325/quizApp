@@ -15,7 +15,7 @@ public class Admin {
     @Id
     private String id;
     private String quizId;
-    private String adminId;
+    private String adminId;  // for singup email and pass
     private String password;
     private String authToken;
 }
