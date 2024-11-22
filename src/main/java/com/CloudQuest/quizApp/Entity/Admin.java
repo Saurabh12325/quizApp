@@ -17,5 +17,5 @@ public class Admin {
     private String quizId;
     private String adminId;
     private String password;
-    private String authToken;
+//    private String authToken;
 }

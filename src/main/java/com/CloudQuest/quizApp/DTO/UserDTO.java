@@ -1,6 +1,6 @@
 package com.CloudQuest.quizApp.DTO;
 
-import com.CloudQuest.quizApp.Entity.User;
+import com.CloudQuest.quizApp.Entity.Player;
 import lombok.Data;
 
 import java.util.List;
@@ -14,8 +14,7 @@ public class UserDTO {
     private int incorrectAnswers;
     private int streak;
 
-    // Constructor to map from User entity
-    public UserDTO(User user) {
+    public UserDTO(Player user) {
         this.username = user.getUsername();
         this.score = user.getScore();
         this.streak = user.getStreak();

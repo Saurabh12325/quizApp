@@ -15,9 +15,9 @@ import java.util.Map;
 @Document(collection = "quizzes")
 public class Quiz {
     @Id
-    private String quizId; // Unique id for the quiz
-    private String adminID; // Admin who created the quiz
-    private String quizTitle; // Title of the quiz
+    private String quizId;
+    private String adminID;
+    private String quizTitle;
     private List<Map<String, QuestionEntity>>questions;
 
 }

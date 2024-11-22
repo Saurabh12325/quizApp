@@ -8,12 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
-
-<<<<<<< HEAD
     @Autowired
-=======
-@Autowired
->>>>>>> 2f902f6fdc72df05279f9558835e5cc6b662e7a9
     private AdminService adminService;
 
     @PostMapping("/create-quiz")

@@ -5,7 +5,6 @@ import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -14,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Builder
-public class User {
+public class Player {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

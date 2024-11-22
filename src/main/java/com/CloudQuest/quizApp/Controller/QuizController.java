@@ -2,8 +2,8 @@ package com.CloudQuest.quizApp.Controller;
 import com.CloudQuest.quizApp.DTO.Average;
 import com.CloudQuest.quizApp.DTO.QuizSummaryResponse;
 import com.CloudQuest.quizApp.Entity.Quiz;
-import com.CloudQuest.quizApp.Entity.User;
-import com.CloudQuest.quizApp.Service.MLService.QuizSummaryService;
+import com.CloudQuest.quizApp.Entity.Player;
+import com.CloudQuest.quizApp.Service.MLQuizSummaryService;
 import com.CloudQuest.quizApp.Service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,15 +15,15 @@ import java.util.List;
 @RequestMapping("quiz")
 public class QuizController {
 
-    private final QuizSummaryService quizSummaryService;
+    private final MLQuizSummaryService quizSummaryService;
 
     @Autowired
-    public QuizController(QuizSummaryService quizSummaryService) {
+    public QuizController(MLQuizSummaryService quizSummaryService) {
         this.quizSummaryService = quizSummaryService;
     }
     @PostMapping("/summary")
     public QuizSummaryResponse getQuizSummary(
-            @RequestBody List<User> users,
+            @RequestBody List<Player> users,
             @RequestBody Average average
     ) {
         return quizSummaryService.getSummary(users, average);
