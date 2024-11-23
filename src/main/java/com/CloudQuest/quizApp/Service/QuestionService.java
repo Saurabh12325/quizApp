@@ -1,54 +1,60 @@
 package com.CloudQuest.quizApp.Service;
+
 import com.CloudQuest.quizApp.Repository.QuestionRepoDao;
 import com.CloudQuest.quizApp.Entity.QuestionEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Component
+@RequiredArgsConstructor
 public class QuestionService {
 
-    @Autowired
-    QuestionRepoDao questionRepoDao;
+    private final QuestionRepoDao questionRepoDao;
+
     public ResponseEntity<List<QuestionEntity>> getAllQuestions() {
         try {
-            return new ResponseEntity<>(questionRepoDao.findAll(), HttpStatus.OK);
-        }catch(Exception e) {
-          e.printStackTrace();
+            List<QuestionEntity> questions = questionRepoDao.findAll();
+            return new ResponseEntity<>(questions, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(new ArrayList<>(),HttpStatus.BAD_REQUEST);
     }
 
     public ResponseEntity<List<QuestionEntity>> getQuestionsByCategory(String category) {
         try {
-            return new ResponseEntity<>(questionRepoDao.findByCategory(category),HttpStatus.OK);
-        }
-        catch(Exception e) {
+            List<QuestionEntity> questions = questionRepoDao.findByCategory(category);
+            return new ResponseEntity<>(questions, HttpStatus.OK);
+        } catch (Exception e) {
             e.printStackTrace();
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(new ArrayList<>(),HttpStatus.BAD_REQUEST);   
+    }
 
+    public ResponseEntity<List<QuestionEntity>> getQuestionsByDifficulty(String difficulty) {
+        try {
+            List<QuestionEntity> questions = questionRepoDao.findByDifficulty(difficulty);
+            return new ResponseEntity<>(questions, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     public ResponseEntity<String> addQuestion(QuestionEntity questionEntity) {
-         questionRepoDao.save(questionEntity);
-         return new ResponseEntity<>("Question added", HttpStatus.CREATED);
-    }
-
-    public  ResponseEntity<List<QuestionEntity>> getQuestionsByDifficulty(String difficulty) {
-        try{
-            return new ResponseEntity<>(questionRepoDao.findByDifficulty(difficulty),HttpStatus.OK);
+        try {
+            questionRepoDao.save(questionEntity);
+            return new ResponseEntity<>("Question added", HttpStatus.CREATED);
         } catch (Exception e) {
-           e.printStackTrace();
+            e.printStackTrace();
+            return new ResponseEntity<>("Error adding question", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-      return  new ResponseEntity<>(new ArrayList<>(),HttpStatus.BAD_REQUEST);
-
     }
-
-
 }

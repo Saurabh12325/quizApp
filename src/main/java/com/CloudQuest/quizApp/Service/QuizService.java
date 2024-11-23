@@ -10,11 +10,9 @@ public class QuizService {
 
     @Autowired
     private QuizRepository quizRepository;
-
     public Quiz getQuiz(String quizId) {
         return quizRepository.findById(quizId).orElseThrow(() -> new RuntimeException("Quiz not found"));
     }
-
     public Quiz updateQuiz(String quizId, Quiz updatedQuiz) {
         Quiz existingQuiz = getQuiz(quizId);
         existingQuiz.setQuizTitle(updatedQuiz.getQuizTitle());

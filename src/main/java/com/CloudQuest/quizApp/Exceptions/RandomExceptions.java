@@ -1,7 +1,5 @@
 package com.CloudQuest.quizApp.Exceptions;
 
-
-
 public class RandomExceptions extends RuntimeException {
     private static final long serialVersionUID = 1L;
     private String message;
