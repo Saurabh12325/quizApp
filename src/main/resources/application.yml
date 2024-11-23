@@ -7,10 +7,7 @@ ml:
   api:
     url: https://quizz-ml.onrender.com/sum
 
-server:
-  port: 8080
 
-#hello
 
 
 
