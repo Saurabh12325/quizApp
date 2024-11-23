@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk
+FROM openjdk:17-jdk AS build
 WORKDIR /quizApp
 COPY pom.xml .
 COPY src src
