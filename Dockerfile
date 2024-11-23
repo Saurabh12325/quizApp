@@ -1,14 +1,21 @@
-# Use an official OpenJDK runtime as a parent image
-FROM openjdk:17-jdk-slim
+FROM openjdk:17-jdk
+WORKDIR /quizApp
+COPY pom.xml .
+COPY src src
 
-# Set the working directory
-WORKDIR /app
+# Copy Maven wrapper
+COPY mvnw .
+COPY .mvn .mvn
 
-# Copy the JAR file into the container and rename it to app.jar
-COPY target/quizApp-0.0.1-SNAPSHOT.jar app.jar
+# Set execution permission for the Maven wrapper
+RUN chmod +x ./mvnw
+RUN ./mvnw clean package -DskipTests
 
-# Expose the application port (optional, for documentation purposes)
+# Stage 2: Create the final Docker image using OpenJDK 19
+FROM openjdk:19-jdk
+VOLUME /tmp
+
+# Copy the JAR from the build stage
+COPY --from=build /quizApp/target/*.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
 EXPOSE 8080
-
-# Run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
