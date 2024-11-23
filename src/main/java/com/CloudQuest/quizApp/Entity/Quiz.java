@@ -17,9 +17,6 @@ public class Quiz {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String quizId; // Unique id for the quiz
-
-    @ManyToOne
-    @JoinColumn(name = "adminId")
     private Admin adminID; // Admin who created the quiz
     private String quizTitle; // Title of the quiz
     private boolean status;

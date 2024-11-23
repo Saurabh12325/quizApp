@@ -3,6 +3,7 @@ package com.CloudQuest.quizApp.Service;
 import com.CloudQuest.quizApp.Repository.QuestionRepoDao;
 import com.CloudQuest.quizApp.Entity.QuestionEntity;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -13,10 +14,10 @@ import java.util.List;
 
 @Service
 @Component
-@RequiredArgsConstructor
-public class QuestionService {
 
-    private final QuestionRepoDao questionRepoDao;
+public class QuestionService {
+     @Autowired
+    QuestionRepoDao questionRepoDao;
 
     public ResponseEntity<List<QuestionEntity>> getAllQuestions() {
         try {

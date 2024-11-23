@@ -6,11 +6,13 @@ import com.CloudQuest.quizApp.Entity.Admin;
 import com.CloudQuest.quizApp.Repository.AdminRepository;
 import com.CloudQuest.quizApp.Security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AdminService {
@@ -18,19 +20,19 @@ public class AdminService {
     @Autowired
     private AdminRepository adminRepository;
 
-    private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
-    public AdminService(BCryptPasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
+
 
     // Admin Registration
     public Admin registerAdmin(AdminRegisterDTO adminRegisterDTO) {
         // Check if the admin already exists
         Optional<Admin> existingAdmin = adminRepository.findByAdminId(adminRegisterDTO.getAdminId());
+        log.info("user created");
         if (existingAdmin.isPresent()) {
             throw new RuntimeException("Admin with this email already exists");
         }

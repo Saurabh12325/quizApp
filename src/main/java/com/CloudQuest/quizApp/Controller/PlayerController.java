@@ -6,7 +6,7 @@
 //import org.springframework.web.bind.annotation.*;
 //
 //@RestController
-//@RequestMapping("/users")
+//@RequestMapping("/player")
 //public class PlayerController {
 //    @Autowired
 //    private PlayerService userService;
