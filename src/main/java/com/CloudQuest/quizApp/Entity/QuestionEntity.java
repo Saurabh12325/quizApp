@@ -16,8 +16,10 @@ import java.util.List;
 @Document(collection = "quizquestions")
 public class QuestionEntity {
  @Id
-//   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String quesKey;
+
+
     private String questionText;
     @ElementCollection
     private List<String> options;
