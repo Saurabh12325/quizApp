@@ -20,5 +20,5 @@ public class Admin {
     private List<String> quizId; //list of quiz id manage by admin
     private String adminId;  // for singup email and pass
     private String password;
-
+//hello
 }
