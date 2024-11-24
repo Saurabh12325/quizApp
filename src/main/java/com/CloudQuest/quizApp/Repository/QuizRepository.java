@@ -14,4 +14,5 @@ import java.util.Optional;
 public interface QuizRepository extends MongoRepository<Quiz,String>{
     Optional<Quiz> findByAdminId(String adminId);
     boolean existsByAdminId(String adminId);
+    Optional<Quiz> findByQuizId(String quizId);
 }

@@ -40,19 +40,18 @@ public class AdminController {
             admin.setPassword(adminRegisterDTO.getPassword());
             Admin createdAdmin = adminService.registerAdmin(adminRegisterDTO);
             log.info("Created successfully" + createdAdmin.toString());
-            return new ResponseEntity<>(createdAdmin, HttpStatus.CREATED); // 201 Created status
+            return new ResponseEntity<>(createdAdmin, HttpStatus.CREATED);
         } catch (Exception e) {
             log.error(e.toString());
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST); // 400 Bad Request in case of error
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
-
     @PostMapping("/login")
     public ResponseEntity<?> loginAdmin(@RequestBody AdminLoginDTO adminLoginDTO) {
         try {
 
             AdminLoginResponseDTO response = adminService.loginAdmin(adminLoginDTO);
-            return ResponseEntity.ok(response); // 200 OK with the response DTO
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             log.error(e.toString());
             return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
