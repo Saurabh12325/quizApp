@@ -40,7 +40,7 @@ public class AdminController {
         try {
             // Use the login credentials to generate JWT token
             String token = adminService.loginAdmin(adminLoginDTO);
-            return ResponseEntity.ok().body(new JwtResponse(token)); // 200 OK and return the token
+            return ResponseEntity.ok().body(new JwtResponse(token));// 200 OK and return the token
         } catch (Exception e) {
             log.error(e.toString());
             return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED); // 401 Unauthorized for invalid login
