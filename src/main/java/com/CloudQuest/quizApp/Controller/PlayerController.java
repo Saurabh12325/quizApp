@@ -5,7 +5,7 @@
 //import org.springframework.http.ResponseEntity;
 //import org.springframework.web.bind.annotation.*;
 //
-//@RestController
+//@RestControllerN
 //@RequestMapping("/player")
 //public class PlayerController {
 //    @Autowired

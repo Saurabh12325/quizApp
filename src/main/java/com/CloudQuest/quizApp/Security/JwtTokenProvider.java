@@ -18,6 +18,7 @@ public class JwtTokenProvider {
         this.expirationTime = expirationTime;
     }
 
+
     // Generate JWT token
     public String generateToken(String adminId) {
         Date now = new Date();
