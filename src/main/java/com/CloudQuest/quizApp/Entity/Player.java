@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Document(collection = "users")
@@ -13,6 +14,8 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Builder
+@Getter
+@Setter
 public class Player {
 
   @Id
@@ -24,6 +27,7 @@ public class Player {
   private List<String> answers;
   private int score;
   private int streak;
+
 
 
 }

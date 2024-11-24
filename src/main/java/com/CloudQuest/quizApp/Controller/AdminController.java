@@ -1,12 +1,18 @@
 package com.CloudQuest.quizApp.Controller;
+import com.CloudQuest.quizApp.DTO.QuizRequestDTO;
 import com.CloudQuest.quizApp.DTO.admin.AdminLoginDTO;
+
+import com.CloudQuest.quizApp.DTO.admin.AdminLoginResponseDTO;
 import com.CloudQuest.quizApp.DTO.admin.AdminRegisterDTO;
 import com.CloudQuest.quizApp.Entity.Admin;
+
+import com.CloudQuest.quizApp.Entity.Quiz;
 import com.CloudQuest.quizApp.Service.AdminService;
+import com.CloudQuest.quizApp.Service.QuizService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +24,7 @@ public class AdminController {
     private static final Logger log = LoggerFactory.getLogger(AdminController.class);
 
     private final AdminService adminService;
+    private final QuizService quizService;
 
     // Admin Registration Endpoint
     @PostMapping("/register")
@@ -27,7 +34,7 @@ public class AdminController {
             admin.setAdminId(adminRegisterDTO.getAdminId());
             admin.setPassword(adminRegisterDTO.getPassword());
             Admin createdAdmin = adminService.registerAdmin(adminRegisterDTO);
-            log.info("Created successfully"+createdAdmin.toString());
+            log.info("Created successfully" + createdAdmin.toString());
             return new ResponseEntity<>(createdAdmin, HttpStatus.CREATED); // 201 Created status
         } catch (Exception e) {
             log.error(e.toString());
@@ -38,12 +45,23 @@ public class AdminController {
     @PostMapping("/login")
     public ResponseEntity<?> loginAdmin(@RequestBody AdminLoginDTO adminLoginDTO) {
         try {
-            // Use the login credentials to generate JWT token
-            String token = adminService.loginAdmin(adminLoginDTO);
-            return ResponseEntity.ok().body(new JwtResponse(token));// 200 OK and return the token
+
+            AdminLoginResponseDTO response = adminService.loginAdmin(adminLoginDTO);
+            return ResponseEntity.ok(response); // 200 OK with the response DTO
         } catch (Exception e) {
             log.error(e.toString());
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED); // 401 Unauthorized for invalid login
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+
+    @PostMapping("/createQuiz")
+    public ResponseEntity<?> createQuiz(@RequestBody QuizRequestDTO quizRequestDTO) {
+        try {
+            Quiz createdQuiz = quizService.createQuiz(quizRequestDTO);
+            return new ResponseEntity<>(createdQuiz, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 }

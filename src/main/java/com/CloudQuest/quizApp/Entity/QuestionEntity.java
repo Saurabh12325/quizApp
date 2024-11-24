@@ -18,16 +18,11 @@ public class QuestionEntity {
  @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String quesKey;
-
-
     private String questionText;
     @ElementCollection
     private List<String> options;
     private String correctAnswer;
  private String category;
     private String difficulty;
-
-
-
 }
 

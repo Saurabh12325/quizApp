@@ -10,6 +10,6 @@ import java.util.List;
 @NoArgsConstructor
 
 public class RoomEntity {
-    private String quizKey;
+    private String quizId;
     private List<String> user;
 }

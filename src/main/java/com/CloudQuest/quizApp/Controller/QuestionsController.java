@@ -28,7 +28,7 @@ public class QuestionsController {
         return questionService.getQuestionsByDifficulty(difficulty);
     }
 
-    @PostMapping("add")
+    @PostMapping("/add")
     public ResponseEntity<String> addQuestion( @RequestBody QuestionEntity questionEntity) {
       return questionService.addQuestion(questionEntity);
     }

@@ -1,5 +1,6 @@
 package com.CloudQuest.quizApp.Entity;
 
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.OneToMany;
 import lombok.*;
 import org.springframework.data.annotation.Id;
@@ -17,6 +18,7 @@ import java.util.List;
 public class Admin {
     @Id
     private String id;
+    @ElementCollection
     private List<String> quizId; //list of quiz id manage by admin
     private String adminId;  // for singup email and pass
     private String password;
