@@ -21,4 +21,6 @@ public class QuizService {
         quiz.setQuestions(quizRequestDTO.getQuestions());
         return quizRepository.save(quiz);
     }
+
+
 }

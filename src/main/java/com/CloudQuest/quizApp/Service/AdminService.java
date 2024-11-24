@@ -3,16 +3,25 @@ package com.CloudQuest.quizApp.Service;
 import com.CloudQuest.quizApp.DTO.admin.AdminLoginDTO;
 import com.CloudQuest.quizApp.DTO.admin.AdminLoginResponseDTO;
 import com.CloudQuest.quizApp.DTO.admin.AdminRegisterDTO;
+import com.CloudQuest.quizApp.DTO.admin.FetchQuizDTO;
 import com.CloudQuest.quizApp.Entity.Admin;
+import com.CloudQuest.quizApp.Entity.QuestionEntity;
 import com.CloudQuest.quizApp.Entity.Quiz;
 import com.CloudQuest.quizApp.Repository.AdminRepository;
+import com.CloudQuest.quizApp.Repository.FetchRepository;
 import com.CloudQuest.quizApp.Repository.QuizRepository;
 import com.CloudQuest.quizApp.Security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -22,15 +31,14 @@ public class AdminService {
 
     @Autowired
     private AdminRepository adminRepository;
-    @Autowired
-    private QuizRepository quizRepository;
+   @Autowired
+    private  QuizRepository quizRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
-
 
 
     // Admin Registration
@@ -50,18 +58,7 @@ public class AdminService {
         return adminRepository.save(admin);
     }
 
-//    // Admin Login
-//    public String loginAdmin(AdminLoginDTO adminLoginDTO) {
-//        // Check if the admin exists
-//        Optional<Admin> admin = adminRepository.findByAdminId(adminLoginDTO.getAdminId());
-//
-//        if (admin.isPresent() && passwordEncoder.matches(adminLoginDTO.getPassword(), admin.get().getPassword())) {
-//            // Generate and return JWT token
-//            return jwtTokenProvider.generateToken(admin.get().getAdminId());
-//        } else {
-//            throw new RuntimeException("Invalid credentials");
-//        }
-//    }
+
 public AdminLoginResponseDTO loginAdmin(AdminLoginDTO adminLoginDTO) {
     // Check if the admin exists
     Optional<Admin> admin = adminRepository.findByAdminId(adminLoginDTO.getAdminId());
@@ -77,21 +74,40 @@ public AdminLoginResponseDTO loginAdmin(AdminLoginDTO adminLoginDTO) {
         AdminLoginResponseDTO response = new AdminLoginResponseDTO();
         response.setAccessToken(token);
 
-        if (quiz.isPresent()) {
-            response.setQuizTitle(quiz.get().getQuizTitle());
-            response.setQuizId(quiz.get().getQuizId());
-            response.setPlayers(quiz.get().getPlayers());
-            response.setStatus(quiz.get().isStatus());
-        } else {
-            response.setQuizTitle(null);
-            response.setQuizId(null);
-            response.setPlayers(null);
-            response.setStatus(false);
-        }
+//        if (quiz.isPresent()) {
+//            response.setQuizTitle(quiz.get().getQuizTitle());
+//            response.setQuizId(quiz.get().getQuizId());
+//            response.setPlayers(quiz.get().getPlayers());
+//            response.setStatus(quiz.get().isStatus());
+//        } else {
+//            response.setQuizTitle(null);
+//            response.setQuizId(null);
+//            response.setPlayers(null);
+//            response.setStatus(false);
+//        }
 
         return response;
     } else {
         throw new RuntimeException("Invalid credentials");
 }
 }
+
+
+    public  List<FetchQuizDTO> fetchAllQuizData() {
+        List<Quiz> quizzes = quizRepository.findAll(); // Fetch all quizzes from the database
+        List<FetchQuizDTO> quizDTOs = new ArrayList<>();
+
+        for (Quiz quiz : quizzes) {
+            FetchQuizDTO dto = new FetchQuizDTO();
+            dto.setQuizTitle(quiz.getQuizTitle());
+            dto.setQuizId(quiz.getQuizId());
+            dto.setPlayers(quiz.getPlayers()); // Assuming players are stored as a list in the Quiz entity
+            dto.setStatus(quiz.isStatus());
+            quizDTOs.add(dto);
+        }
+
+        return quizDTOs; //
+
+    }
+
 }

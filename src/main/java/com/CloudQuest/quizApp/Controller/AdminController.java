@@ -4,8 +4,10 @@ import com.CloudQuest.quizApp.DTO.admin.AdminLoginDTO;
 
 import com.CloudQuest.quizApp.DTO.admin.AdminLoginResponseDTO;
 import com.CloudQuest.quizApp.DTO.admin.AdminRegisterDTO;
+import com.CloudQuest.quizApp.DTO.admin.FetchQuizDTO;
 import com.CloudQuest.quizApp.Entity.Admin;
 
+import com.CloudQuest.quizApp.Entity.QuestionEntity;
 import com.CloudQuest.quizApp.Entity.Quiz;
 import com.CloudQuest.quizApp.Service.AdminService;
 import com.CloudQuest.quizApp.Service.QuizService;
@@ -16,6 +18,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -54,7 +58,6 @@ public class AdminController {
         }
     }
 
-
     @PostMapping("/createQuiz")
     public ResponseEntity<?> createQuiz(@RequestBody QuizRequestDTO quizRequestDTO) {
         try {
@@ -62,6 +65,17 @@ public class AdminController {
             return new ResponseEntity<>(createdQuiz, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+    @GetMapping("/fetchQuiz")
+    public  ResponseEntity<?> fetchQuizData() {
+        try {
+            List<FetchQuizDTO> quizzes = adminService.fetchAllQuizData();
+            return new ResponseEntity<>(quizzes, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

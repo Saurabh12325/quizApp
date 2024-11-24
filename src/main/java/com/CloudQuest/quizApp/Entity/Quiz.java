@@ -15,7 +15,7 @@ import java.util.Map;
 @Document(collection = "quizzes")
 public class Quiz {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String quizId; // Unique id for the quiz
     private String adminId; // Admin who created the quiz
     private String quizTitle; // Title of the quiz
