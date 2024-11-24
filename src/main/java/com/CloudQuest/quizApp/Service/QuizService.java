@@ -7,11 +7,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class QuizService {
+@Autowired
+    private  QuizRepository quizRepository;
 
-    private final QuizRepository quizRepository;
+    public boolean existsByAdminId(String adminId) {
+        return quizRepository.existsByAdminId(adminId);  // Check if a quiz exists for the given adminId
+    }
+
 
     public Quiz createQuiz(QuizRequestDTO quizRequestDTO) {
         Quiz quiz = new Quiz();
@@ -23,4 +30,7 @@ public class QuizService {
     }
 
 
+    public Optional<Quiz> getQuizByAdminId(String adminId) {
+        return quizRepository.findByAdminId(adminId);
+}
 }

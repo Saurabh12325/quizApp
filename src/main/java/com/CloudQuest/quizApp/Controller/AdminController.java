@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -60,6 +61,9 @@ public class AdminController {
 
     @PostMapping("/createQuiz")
     public ResponseEntity<?> createQuiz(@RequestBody QuizRequestDTO quizRequestDTO) {
+        if (quizService.existsByAdminId(quizRequestDTO.getAdminId())) {
+            return new ResponseEntity<>("A quiz already exists for the provided adminId.", HttpStatus.BAD_REQUEST);
+}
         try {
             Quiz createdQuiz = quizService.createQuiz(quizRequestDTO);
             return new ResponseEntity<>(createdQuiz, HttpStatus.OK);
@@ -70,13 +74,18 @@ public class AdminController {
 
 
     @GetMapping("/fetchQuiz")
-    public  ResponseEntity<?> fetchQuizData() {
+    public ResponseEntity<?> fetchQuizByAdminId(@RequestParam String adminId) {
         try {
-            List<FetchQuizDTO> quizzes = adminService.fetchAllQuizData();
-            return new ResponseEntity<>(quizzes, HttpStatus.OK);
+            // Fetch the quiz data for the given adminId
+            Optional<Quiz> quiz = quizService.getQuizByAdminId(adminId);
+            if (quiz != null) {
+                return new ResponseEntity<>(quiz, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("No quiz found for the provided adminId.", HttpStatus.NOT_FOUND);
+            }
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+}
+}
 }
 

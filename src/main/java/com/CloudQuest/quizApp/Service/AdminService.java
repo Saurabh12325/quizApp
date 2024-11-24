@@ -92,22 +92,23 @@ public AdminLoginResponseDTO loginAdmin(AdminLoginDTO adminLoginDTO) {
 }
 }
 
-
-    public  List<FetchQuizDTO> fetchAllQuizData() {
-        List<Quiz> quizzes = quizRepository.findAll(); // Fetch all quizzes from the database
-        List<FetchQuizDTO> quizDTOs = new ArrayList<>();
-
-        for (Quiz quiz : quizzes) {
-            FetchQuizDTO dto = new FetchQuizDTO();
-            dto.setQuizTitle(quiz.getQuizTitle());
-            dto.setQuizId(quiz.getQuizId());
-            dto.setPlayers(quiz.getPlayers()); // Assuming players are stored as a list in the Quiz entity
-            dto.setStatus(quiz.isStatus());
-            quizDTOs.add(dto);
-        }
-
-        return quizDTOs; //
-
-    }
+//
+//    public  List<FetchQuizDTO> fetchAllQuizData() {
+//        List<Quiz> quizzes = quizRepository.findByAdminId(String, adminId); // Fetch all quizzes from the database
+//        List<FetchQuizDTO> quizDTOs = new ArrayList<>();
+//
+//        for (Quiz quiz : quizzes) {
+//            FetchQuizDTO dto = new FetchQuizDTO();
+//            dto.setAdminId(quiz.getAdminId());
+//            dto.setQuizTitle(quiz.getQuizTitle());
+//            dto.setQuizId(quiz.getQuizId());
+//            dto.setPlayers(quiz.getPlayers()); // Assuming players are stored as a list in the Quiz entity
+//            dto.setStatus(quiz.isStatus());
+//            quizDTOs.add(dto);
+//        }
+//
+//        return quizDTOs; //
+//
+//    }
 
 }
