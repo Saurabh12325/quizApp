@@ -16,6 +16,7 @@ public class QuizService {
     public Quiz createQuiz(QuizRequestDTO quizRequestDTO) {
         Quiz quiz = new Quiz();
         quiz.setQuizId(quizRequestDTO.getQuizId());
+        quiz.setAdminId(quizRequestDTO.getAdminId());
         quiz.setQuizTitle(quizRequestDTO.getQuizTitle());
         quiz.setQuestions(quizRequestDTO.getQuestions());
         return quizRepository.save(quiz);

@@ -17,7 +17,7 @@ public class Quiz {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String quizId; // Unique id for the quiz
-    private Admin adminId; // Admin who created the quiz
+    private String adminId; // Admin who created the quiz
     private String quizTitle; // Title of the quiz
     private boolean status;
     private List<String> players;

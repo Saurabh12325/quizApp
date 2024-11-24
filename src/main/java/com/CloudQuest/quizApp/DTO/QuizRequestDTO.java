@@ -10,6 +10,6 @@ import java.util.Map;
 public class QuizRequestDTO {
     private String quizId;
     private String quizTitle;
-
+    private String adminId;
     private List<QuestionEntity> questions;
 }
