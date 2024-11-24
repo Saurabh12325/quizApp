@@ -25,7 +25,7 @@ public class SecurityConfig {
 
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers( "quizzes/category/**","quizzes/difficulty/**", "QuizEntry/**").permitAll()
+                        .requestMatchers("admin/register","admin/login", "quizzes/category/**","quizzes/difficulty/**", "QuizEntry/**").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 

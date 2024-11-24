@@ -43,7 +43,7 @@ public class AdminController {
             return new ResponseEntity<>(createdAdmin, HttpStatus.CREATED);
         } catch (Exception e) {
             log.error(e.toString());
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Already registered", HttpStatus.CONFLICT);
         }
     }
     @PostMapping("/login")
