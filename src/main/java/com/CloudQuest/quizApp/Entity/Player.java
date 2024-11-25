@@ -29,8 +29,4 @@ public class Player {
   private int  wrongAnswers;
   private int score;
   private int streak;
-  private float averageScore;
-  private float averageCorrectAnswers;
-  private float averageIncorrectAnswers;
-  private float averageStreak;
 }
