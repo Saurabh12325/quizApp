@@ -3,6 +3,7 @@ package com.CloudQuest.quizApp.Controller;
 import com.CloudQuest.quizApp.DTO.MLRequestDTO.UserDataDTO;
 import com.CloudQuest.quizApp.DTO.playerDTO.PlayerRequestDTO;
 import com.CloudQuest.quizApp.DTO.playerDTO.PlayerResponseDTO;
+import com.CloudQuest.quizApp.Repository.PlayerRepository;
 import com.CloudQuest.quizApp.Service.PlayerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import java.util.List;
 
 public class PlayerController{
 private final PlayerService playerService;
+private final PlayerRepository playerRepository;
 @PostMapping("/enter")
 public ResponseEntity<PlayerResponseDTO> enterQuiz(@RequestBody PlayerRequestDTO playerRequestDTO) {
     try {
@@ -34,8 +36,12 @@ public ResponseEntity<PlayerResponseDTO> enterQuiz(@RequestBody PlayerRequestDTO
     }
 
     // Endpoint to fetch all user data by username
-    @GetMapping("/find/{username}")
-    public List<UserDataDTO> findAllByUsername(@PathVariable String username) {
-        return playerService.findAllByUsername(username);
-    }
+//    @GetMapping("/findAll")
+//    public List<UserDataDTO> findAllData(@RequestBody UserDataDTO userDataDTO) {
+//        return playerService.findAllData(userDataDTO);
+//    }
+    @GetMapping("/findAll")
+    public List<UserDataDTO> getAllPlayers() {
+        return playerRepository.findAll();
+}
 }

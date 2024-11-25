@@ -39,8 +39,5 @@ public class PlayerService {
         return playerRepository.save(userDataDTO);
     }
 
-    // Fetch all records by username
-    public List<UserDataDTO> findAllByUsername(String username) {
-        return playerRepository.findAllByUsername(username);
-    }
+
 }

@@ -9,5 +9,5 @@ import java.util.List;
 import java.util.Optional;
 
 public  interface PlayerRepository extends MongoRepository<UserDataDTO,String> {
-    List<UserDataDTO> findAllByUsername(String username);
+
 }
