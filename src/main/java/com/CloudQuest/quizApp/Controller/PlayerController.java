@@ -24,9 +24,9 @@ public ResponseEntity<PlayerResponseDTO> enterQuiz(@RequestBody PlayerRequestDTO
     try {
 
         PlayerResponseDTO playerResponseDTO = playerService.getQuizDetails(playerRequestDTO);
-        return new ResponseEntity<>(playerResponseDTO, HttpStatus.OK); // Return quiz title and questions
+        return new ResponseEntity<>(playerResponseDTO, HttpStatus.OK);
     } catch (Exception e) {
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND); // If quiz is not found
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 }
 

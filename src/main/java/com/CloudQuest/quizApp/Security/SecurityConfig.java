@@ -19,13 +19,12 @@ public class SecurityConfig {
     public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("admin/register","admin/login","admin/createQuiz","quizzes/category/**","quizzes/difficulty/**", "QuizEntry/**","/admin/fetchQuiz?adminId=").permitAll()
+                        .requestMatchers("admin/register","admin/login","admin/createQuiz","quizzes/category/**","quizzes/difficulty/**", "QuizEntry/**","/admin/fetchQuiz?**").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 

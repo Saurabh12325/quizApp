@@ -49,7 +49,6 @@ public class AdminController {
     @PostMapping("/login")
     public ResponseEntity<?> loginAdmin(@RequestBody AdminLoginDTO adminLoginDTO) {
         try {
-
             AdminLoginResponseDTO response = adminService.loginAdmin(adminLoginDTO);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
@@ -57,7 +56,6 @@ public class AdminController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
         }
     }
-
     @PostMapping("/createQuiz")
     public ResponseEntity<?> createQuiz(@RequestBody QuizRequestDTO quizRequestDTO) {
         if (quizService.existsByAdminId(quizRequestDTO.getAdminId())) {
@@ -71,11 +69,10 @@ public class AdminController {
         }
     }
 
-
     @GetMapping("/fetchQuiz")
     public ResponseEntity<?> fetchQuizByAdminId(@RequestParam String adminId) {
         try {
-            // Fetch the quiz data for the given adminId
+
             Optional<Quiz> quiz = quizService.getQuizByAdminId(adminId);
             if (quiz != null) {
                 return new ResponseEntity<>(quiz, HttpStatus.OK);
